@@ -1,23 +1,39 @@
-import { Module } from '@nestjs/common';
-import { createObserveModule } from '@nestjs/observe';
-import { AppController } from './app.controller.js';
-import { AppService } from './app.service.js';
-import { AuthModule } from './auth/auth.module.js';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 
-export const { ObserveModule, ObserveInstrument } = createObserveModule();
+import { envValidationSchema } from './config/env.validation.js';
+import { PrismaModule } from './prisma/prisma.module.js';
+import { AuthModule } from './auth/auth.module.js';
+import { UsersModule } from './users/users.module.js';
+import { ProjectsModule } from './projects/projects.module.js';
+import { LabelsModule } from './labels/labels.module.js';
+import { TasksModule } from './tasks/tasks.module.js';
+import { CommentsModule } from './comments/comments.module.js';
+
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard.js';
+import { RequestLoggerMiddleware } from './common/middleware/request-logger.middleware.js';
 
 @Module({
   imports: [
-    // Distributed tracing, auto-correlated logs, request/job metrics, error
-    // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
-    ObserveModule.forRoot({
-      appKey: 'YOUR_APP_KEY',
-      appSecret: 'YOUR_APP_SECRET',
-      serviceId: 'task-management-api',
-    }),
+    ConfigModule.forRoot({ isGlobal: true, validationSchema: envValidationSchema }),
+    ThrottlerModule.forRoot([{ ttl: 60000, limit: 100 }]),
+    PrismaModule,
     AuthModule,
+    UsersModule,
+    ProjectsModule,
+    LabelsModule,
+    TasksModule,
+    CommentsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    { provide: APP_GUARD, useClass: JwtAuthGuard },   // global auth — see Concepts §9
+    { provide: APP_GUARD, useClass: ThrottlerGuard },  // global rate limiting
+  ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(RequestLoggerMiddleware).forRoutes('*');
+  }
+}
