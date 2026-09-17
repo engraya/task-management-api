@@ -1,4 +1,4 @@
-﻿# Task Management API
+# Task Management API
 
 A REST API for collaborative project and task management, built with NestJS 12, TypeScript, Prisma 7, and PostgreSQL. Users can create projects, manage membership, assign tasks, organize work with labels, and discuss tasks through comments.
 
@@ -261,7 +261,7 @@ test/         Test setup, fixtures, and end-to-end tests
 
 ## CI and container publishing
 
-[CI](.github/workflows/ci.yml) runs on pushes and pull requests to `main` and `develop`. It installs dependencies, generates Prisma Client, applies migrations to PostgreSQL 17, runs lint and both test suites, compiles the application, and builds the Docker image.
+[CI](.github/workflows/ci.yml) runs on pushes and pull requests to `main` and `develop`. It installs dependencies, generates Prisma Client, applies migrations to PostgreSQL 17, runs lint and both test suites, compiles the application, builds the Docker image, and verifies that the production container can run migrations and serve its health endpoint.
 
 [CD](.github/workflows/cd.yml) runs on pushes to `main` and publishes images to `ghcr.io/engraya/task-management-api` with SHA and `latest` tags. It runs independently of CI and does not deploy to a running server.
 

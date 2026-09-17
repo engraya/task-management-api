@@ -7,7 +7,8 @@ COPY prisma ./prisma
 RUN npm ci
 
 COPY . .
-RUN npx prisma generate
+# Client generation needs a URL to load prisma.config.ts, but does not connect.
+RUN DATABASE_URL=postgresql://build:build@localhost:5432/build npx prisma generate
 RUN npm run build
 
 # ---- Runner ----
@@ -22,6 +23,7 @@ COPY prisma ./prisma
 RUN npm ci --omit=dev
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
+COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
 COPY --from=builder /app/dist ./dist
 
 USER nestjs

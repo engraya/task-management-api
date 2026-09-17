@@ -17,7 +17,7 @@ jobs:
           POSTGRES_DB: task_management_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-        ports: ["5432:5432"]
+        ports: ['5432:5432']
         options: >-
           --health-cmd "pg_isready -U postgres"
           --health-interval 5s
@@ -49,3 +49,27 @@ jobs:
 
       - name: Verify Docker image builds
         run: docker build -t task-management-api:ci .
+
+      - name: Verify container migrations
+        run: >-
+          docker run --rm --network host
+          -e DATABASE_URL
+          task-management-api:ci npm run prisma:migrate:deploy
+
+      - name: Verify container startup
+        run: |
+          docker run -d --name task-management-smoke --network host \
+            -e DATABASE_URL -e JWT_SECRET -e JWT_EXPIRES_IN -e CORS_ORIGIN \
+            task-management-api:ci
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://localhost:3000/api/v1/health; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs task-management-smoke
+          exit 1
+
+      - name: Clean up smoke-test container
+        if: always()
+        run: docker rm -f task-management-smoke || true

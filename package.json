@@ -63,6 +63,7 @@
     "or": "^0.2.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
+    "prisma": "^7.10.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
@@ -81,7 +82,6 @@
     "oxlint": "^1.58.0",
     "oxlint-tsgolint": "^7.0.2001",
     "prettier": "^3.4.2",
-    "prisma": "^7.10.0",
     "source-map-support": "^0.5.21",
     "supertest": "^7.2.2",
     "typescript": "^6.0.2",
