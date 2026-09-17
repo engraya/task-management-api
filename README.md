@@ -46,7 +46,7 @@ $ npm run start:prod
 
 ## Run tests
 
-Use Node.js 22.18+ and Docker. The integration and end-to-end tests use a
+Use Node.js 24.15+ (24.x) and Docker. CI and Docker use Node.js 24.20.0. The integration and end-to-end tests use a
 separate PostgreSQL database on port 5433, never the application's `DATABASE_URL`.
 
 ```bash
