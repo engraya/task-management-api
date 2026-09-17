@@ -1,7 +1,14 @@
 import { PrismaClient, TaskStatus, TaskPriority, ProjectRole } from '@prisma/client';
+import 'dotenv/config';
+import { PrismaPg } from '@prisma/adapter-pg';
 import * as bcrypt from 'bcrypt';
 
-const prisma = new PrismaClient();
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) throw new Error('DATABASE_URL is required');
+const schema = new URL(connectionString).searchParams.get('schema') ?? 'public';
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString }, { schema }),
+});
 
 async function main() {
   const passwordHash = await bcrypt.hash('password123', 10);

@@ -6,6 +6,8 @@ import { createUserFixture } from '../../test/fixtures/user.fixture.js';
 describe('ProjectsService (integration)', () => {
   let service: ProjectsService;
   let prisma: PrismaService;
+  let ownerId: string | undefined;
+  let projectId: string | undefined;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -17,12 +19,19 @@ describe('ProjectsService (integration)', () => {
   });
 
   afterAll(async () => {
-    await prisma.$disconnect();
+    try {
+      if (projectId) await prisma.project.deleteMany({ where: { id: projectId } });
+      if (ownerId) await prisma.user.deleteMany({ where: { id: ownerId } });
+    } finally {
+      await prisma?.$disconnect();
+    }
   });
 
   it('creating a project also makes the creator its OWNER member', async () => {
     const owner = await createUserFixture(prisma);
+    ownerId = owner.id;
     const project = await service.create({ name: 'Integration Test Project' }, owner.id);
+    projectId = project.id;
 
     const membership = await prisma.projectMember.findUnique({
       where: { projectId_userId: { projectId: project.id, userId: owner.id } },

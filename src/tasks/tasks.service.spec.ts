@@ -1,4 +1,5 @@
 import { Test } from '@nestjs/testing';
+import { vi } from 'vitest';
 import { ForbiddenException } from '@nestjs/common';
 import { TasksService } from './tasks.service.js';
 import { PrismaService } from '../prisma/prisma.service.js';
@@ -6,12 +7,12 @@ import { PrismaService } from '../prisma/prisma.service.js';
 describe('TasksService', () => {
   let service: TasksService;
   const prismaMock = {
-    task: { create: jest.fn(), findUnique: jest.fn(), update: jest.fn() },
-    projectMember: { findUnique: jest.fn() },
+    task: { create: vi.fn(), findUnique: vi.fn(), update: vi.fn() },
+    projectMember: { findUnique: vi.fn() },
   };
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    vi.resetAllMocks();
     const moduleRef = await Test.createTestingModule({
       providers: [TasksService, { provide: PrismaService, useValue: prismaMock }],
     }).compile();

@@ -8,7 +8,9 @@ export class LabelsService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(projectId: string, dto: CreateLabelDto) {
-    return this.prisma.label.create({ data: { ...dto, projectId } });
+    return this.prisma.label.create({
+      data: { name: dto.name, color: dto.color, projectId },
+    });
   }
 
   findAllForProject(projectId: string) {

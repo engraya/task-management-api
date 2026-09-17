@@ -46,8 +46,18 @@ $ npm run start:prod
 
 ## Run tests
 
+Use Node.js 22.18+ and Docker. The integration and end-to-end tests use a
+separate PostgreSQL database on port 5433, never the application's `DATABASE_URL`.
+
 ```bash
-# unit tests
+# prepare the isolated test database
+$ npm run test:db:start
+$ npm run test:db:migrate
+
+# TypeScript check
+$ npm run typecheck
+
+# unit and integration tests
 $ npm run test
 
 # e2e tests
@@ -55,7 +65,14 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+
+# stop the test database when finished
+$ npm run test:db:stop
 ```
+
+To use another dedicated test database, set `TEST_DATABASE_URL` before running
+the tests and apply the migrations to that database first. The
+`test:db:migrate` script targets the default local test database only.
 
 ## Deployment
 

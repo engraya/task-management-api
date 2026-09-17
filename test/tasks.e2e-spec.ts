@@ -1,28 +1,40 @@
 import { Test } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
-import * as request from 'supertest';
+import request from 'supertest';
 import { AppModule } from '../src/app.module.js';
+import { TransformInterceptor } from '../src/common/interceptors/transform.interceptor.js';
+import { PrismaService } from '../src/prisma/prisma.service.js';
+import { randomUUID } from 'node:crypto';
 
 describe('Tasks flow (e2e)', () => {
   let app: INestApplication;
   let token: string;
   let projectId: string;
   let taskId: string;
+  const email = `e2e-${randomUUID()}@example.com`;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({ imports: [AppModule] }).compile();
     app = moduleRef.createNestApplication();
     app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+    app.useGlobalInterceptors(new TransformInterceptor());
     app.setGlobalPrefix('api/v1');
     await app.init();
   });
 
   afterAll(async () => {
-    await app.close();
+    try {
+      if (app) {
+        const prisma = app.get(PrismaService);
+        if (projectId) await prisma.project.deleteMany({ where: { id: projectId } });
+        await prisma.user.deleteMany({ where: { email } });
+      }
+    } finally {
+      await app?.close();
+    }
   });
 
   it('registers and logs in', async () => {
-    const email = `e2e-${Date.now()}@example.com`;
     await request(app.getHttpServer())
       .post('/api/v1/auth/register')
       .send({ email, password: 'password123', name: 'E2E User' })

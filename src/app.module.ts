@@ -14,6 +14,7 @@ import { CommentsModule } from './comments/comments.module.js';
 
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard.js';
 import { RequestLoggerMiddleware } from './common/middleware/request-logger.middleware.js';
+import { HealthController } from './app.controller.js';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { RequestLoggerMiddleware } from './common/middleware/request-logger.midd
     TasksModule,
     CommentsModule,
   ],
+  controllers: [HealthController],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },   // global auth — see Concepts §9
     { provide: APP_GUARD, useClass: ThrottlerGuard },  // global rate limiting
