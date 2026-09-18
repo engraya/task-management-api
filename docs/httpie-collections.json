@@ -1,0 +1,1173 @@
+{
+  "meta": {
+    "format": "httpie",
+    "version": "1.0.0",
+    "contentType": "workspace",
+    "schema": "https://raw.githubusercontent.com/httpie/schema/main/versions/1.0.0/schema.json"
+  },
+  "entry": {
+    "name": "Task & Project Management API",
+    "collections": [
+      {
+        "name": "Health",
+        "auth": {
+          "type": "none"
+        },
+        "requests": [
+          {
+            "name": "GET /api/v1/health",
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/health",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Auth",
+        "auth": {
+          "type": "none"
+        },
+        "requests": [
+          {
+            "name": "POST /api/v1/auth/register",
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/auth/register",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"email\": \"jane@example.com\",\n  \"password\": \"a-strong-password\",\n  \"name\": \"Jane Doe\"\n}"
+              }
+            }
+          },
+          {
+            "name": "POST /api/v1/auth/login",
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/auth/login",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"email\": \"jane@example.com\",\n  \"password\": \"a-strong-password\"\n}"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Users",
+        "auth": {
+          "type": "none"
+        },
+        "requests": [
+          {
+            "name": "GET /api/v1/users/me",
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/users/me",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          },
+          {
+            "name": "PATCH /api/v1/users/me",
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/users/me",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"name\": \"Jane Smith\"\n}"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Projects",
+        "auth": {
+          "type": "none"
+        },
+        "requests": [
+          {
+            "name": "POST /api/v1/projects",
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/projects",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"name\": \"Website redesign\",\n  \"description\": \"Plan and deliver the new company website.\"\n}"
+              }
+            }
+          },
+          {
+            "name": "GET /api/v1/projects",
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          },
+          {
+            "name": "GET /api/v1/projects/{id}",
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:id",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "id",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          },
+          {
+            "name": "PATCH /api/v1/projects/{id}",
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/projects/:id",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "id",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"name\": \"Website redesign\",\n  \"description\": \"Plan and deliver the new company website.\"\n}"
+              }
+            }
+          },
+          {
+            "name": "DELETE /api/v1/projects/{id}",
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/projects/:id",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "id",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          },
+          {
+            "name": "POST /api/v1/projects/{id}/members",
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/projects/:id/members",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "id",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"userId\": \"{{userId}}\",\n  \"role\": \"MEMBER\"\n}"
+              }
+            }
+          },
+          {
+            "name": "DELETE /api/v1/projects/{id}/members/{userId}",
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/projects/:id/members/:userId",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "id",
+                "value": "{{projectId}}",
+                "enabled": true
+              },
+              {
+                "name": "userId",
+                "value": "{{userId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Labels",
+        "auth": {
+          "type": "none"
+        },
+        "requests": [
+          {
+            "name": "POST /api/v1/projects/{projectId}/labels",
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/labels",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"name\": \"Bug\",\n  \"color\": \"#EF4444\"\n}"
+              }
+            }
+          },
+          {
+            "name": "GET /api/v1/projects/{projectId}/labels",
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/labels",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          },
+          {
+            "name": "PATCH /api/v1/projects/{projectId}/labels/{labelId}",
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/labels/:labelId",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "labelId",
+                "value": "{{labelId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"name\": \"Bug\",\n  \"color\": \"#EF4444\"\n}"
+              }
+            }
+          },
+          {
+            "name": "DELETE /api/v1/projects/{projectId}/labels/{labelId}",
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/labels/:labelId",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "labelId",
+                "value": "{{labelId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tasks",
+        "auth": {
+          "type": "none"
+        },
+        "requests": [
+          {
+            "name": "POST /api/v1/projects/{projectId}/tasks",
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"title\": \"Build the login page\",\n  \"description\": \"Implement the login form and validation messages.\",\n  \"priority\": \"HIGH\",\n  \"dueDate\": \"2026-12-31T17:00:00.000Z\",\n  \"assigneeId\": \"{{userId}}\"\n}"
+              }
+            }
+          },
+          {
+            "name": "GET /api/v1/projects/{projectId}/tasks",
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [
+              {
+                "name": "page",
+                "value": "1",
+                "enabled": true
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "enabled": true
+              },
+              {
+                "name": "search",
+                "value": "login",
+                "enabled": false
+              },
+              {
+                "name": "status",
+                "value": "TODO",
+                "enabled": false
+              },
+              {
+                "name": "priority",
+                "value": "HIGH",
+                "enabled": false
+              },
+              {
+                "name": "assigneeId",
+                "value": "{{userId}}",
+                "enabled": false
+              },
+              {
+                "name": "labelId",
+                "value": "{{labelId}}",
+                "enabled": false
+              }
+            ],
+            "body": {
+              "type": "none"
+            }
+          },
+          {
+            "name": "GET /api/v1/projects/{projectId}/tasks/{taskId}",
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks/:taskId",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "taskId",
+                "value": "{{taskId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          },
+          {
+            "name": "PATCH /api/v1/projects/{projectId}/tasks/{taskId}",
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks/:taskId",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "taskId",
+                "value": "{{taskId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"title\": \"Build the login page\",\n  \"description\": \"Implement the login form and validation messages.\",\n  \"priority\": \"HIGH\",\n  \"dueDate\": \"2026-12-31T17:00:00.000Z\"\n}"
+              }
+            }
+          },
+          {
+            "name": "DELETE /api/v1/projects/{projectId}/tasks/{taskId}",
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks/:taskId",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "taskId",
+                "value": "{{taskId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          },
+          {
+            "name": "PATCH /api/v1/projects/{projectId}/tasks/{taskId}/status",
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks/:taskId/status",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "taskId",
+                "value": "{{taskId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"status\": \"IN_PROGRESS\"\n}"
+              }
+            }
+          },
+          {
+            "name": "PATCH /api/v1/projects/{projectId}/tasks/{taskId}/assign",
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks/:taskId/assign",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "taskId",
+                "value": "{{taskId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"assigneeId\": \"{{userId}}\"\n}"
+              }
+            }
+          },
+          {
+            "name": "POST /api/v1/projects/{projectId}/tasks/{taskId}/labels",
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks/:taskId/labels",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "taskId",
+                "value": "{{taskId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"labelId\": \"{{labelId}}\"\n}"
+              }
+            }
+          },
+          {
+            "name": "DELETE /api/v1/projects/{projectId}/tasks/{taskId}/labels/{labelId}",
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks/:taskId/labels/:labelId",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "taskId",
+                "value": "{{taskId}}",
+                "enabled": true
+              },
+              {
+                "name": "labelId",
+                "value": "{{labelId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Comments",
+        "auth": {
+          "type": "none"
+        },
+        "requests": [
+          {
+            "name": "POST /api/v1/projects/{projectId}/tasks/{taskId}/comments",
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks/:taskId/comments",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "taskId",
+                "value": "{{taskId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "text",
+              "text": {
+                "format": "application/json",
+                "value": "{\n  \"body\": \"The implementation is ready for review.\"\n}"
+              }
+            }
+          },
+          {
+            "name": "GET /api/v1/projects/{projectId}/tasks/{taskId}/comments",
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks/:taskId/comments",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "taskId",
+                "value": "{{taskId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [
+              {
+                "name": "page",
+                "value": "1",
+                "enabled": true
+              },
+              {
+                "name": "limit",
+                "value": "20",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "type": "none"
+            }
+          },
+          {
+            "name": "DELETE /api/v1/projects/{projectId}/tasks/{taskId}/comments/{commentId}",
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/projects/:projectId/tasks/:taskId/comments/:commentId",
+            "auth": {
+              "type": "none"
+            },
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json",
+                "enabled": true
+              },
+              {
+                "name": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "enabled": true
+              }
+            ],
+            "pathParams": [
+              {
+                "name": "commentId",
+                "value": "{{commentId}}",
+                "enabled": true
+              },
+              {
+                "name": "projectId",
+                "value": "{{projectId}}",
+                "enabled": true
+              },
+              {
+                "name": "taskId",
+                "value": "{{taskId}}",
+                "enabled": true
+              }
+            ],
+            "queryParams": [],
+            "body": {
+              "type": "none"
+            }
+          }
+        ]
+      }
+    ],
+    "environments": [
+      {
+        "name": "Local",
+        "isDefault": true,
+        "isLocalOnly": true,
+        "variables": [
+          {
+            "name": "baseUrl",
+            "value": "http://localhost:3000",
+            "isSecret": false
+          },
+          {
+            "name": "accessToken",
+            "value": "",
+            "isSecret": true
+          },
+          {
+            "name": "userId",
+            "value": "11111111-1111-4111-8111-111111111111",
+            "isSecret": false
+          },
+          {
+            "name": "projectId",
+            "value": "22222222-2222-4222-8222-222222222222",
+            "isSecret": false
+          },
+          {
+            "name": "taskId",
+            "value": "33333333-3333-4333-8333-333333333333",
+            "isSecret": false
+          },
+          {
+            "name": "labelId",
+            "value": "44444444-4444-4444-8444-444444444444",
+            "isSecret": false
+          },
+          {
+            "name": "commentId",
+            "value": "55555555-5555-4555-8555-555555555555",
+            "isSecret": false
+          }
+        ]
+      }
+    ],
+    "drafts": []
+  }
+}

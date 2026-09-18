@@ -1,0 +1,1487 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "operationId": "AuthController_register",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDto"
+              },
+              "example": {
+                "email": "jane@example.com",
+                "password": "a-strong-password",
+                "name": "Jane Doe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              },
+              "example": {
+                "email": "jane@example.com",
+                "password": "a-strong-password"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/v1/users/me": {
+      "get": {
+        "operationId": "UsersController_getMe",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "patch": {
+        "operationId": "UsersController_updateMe",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              },
+              "example": {
+                "name": "Jane Smith"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/api/v1/projects": {
+      "post": {
+        "operationId": "ProjectsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectDto"
+              },
+              "example": {
+                "name": "Website redesign",
+                "description": "Plan and deliver the new company website."
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "get": {
+        "operationId": "ProjectsController_findMine",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/api/v1/projects/{id}": {
+      "get": {
+        "operationId": "ProjectsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "patch": {
+        "operationId": "ProjectsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectDto"
+              },
+              "example": {
+                "name": "Website redesign",
+                "description": "Plan and deliver the new company website."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "delete": {
+        "operationId": "ProjectsController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/api/v1/projects/{id}/members": {
+      "post": {
+        "operationId": "ProjectsController_addMember",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMemberDto"
+              },
+              "example": {
+                "userId": "11111111-1111-4111-8111-111111111111",
+                "role": "MEMBER"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/api/v1/projects/{id}/members/{userId}": {
+      "delete": {
+        "operationId": "ProjectsController_removeMember",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "11111111-1111-4111-8111-111111111111"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/api/v1/projects/{projectId}/labels": {
+      "post": {
+        "operationId": "LabelsController_create",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLabelDto"
+              },
+              "example": {
+                "name": "Bug",
+                "color": "#EF4444"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "labels"
+        ]
+      },
+      "get": {
+        "operationId": "LabelsController_findAll",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "labels"
+        ]
+      }
+    },
+    "/api/v1/projects/{projectId}/labels/{labelId}": {
+      "patch": {
+        "operationId": "LabelsController_update",
+        "parameters": [
+          {
+            "name": "labelId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "44444444-4444-4444-8444-444444444444"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLabelDto"
+              },
+              "example": {
+                "name": "Bug",
+                "color": "#EF4444"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "labels"
+        ]
+      },
+      "delete": {
+        "operationId": "LabelsController_remove",
+        "parameters": [
+          {
+            "name": "labelId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "44444444-4444-4444-8444-444444444444"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "labels"
+        ]
+      }
+    },
+    "/api/v1/projects/{projectId}/tasks": {
+      "post": {
+        "operationId": "TasksController_create",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskDto"
+              },
+              "example": {
+                "title": "Build the login page",
+                "description": "Implement the login form and validation messages.",
+                "priority": "HIGH",
+                "dueDate": "2026-12-31T17:00:00.000Z",
+                "assigneeId": "11111111-1111-4111-8111-111111111111"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "tasks"
+        ]
+      },
+      "get": {
+        "operationId": "TasksController_findAll",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "example": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "login",
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "TODO",
+              "type": "string",
+              "enum": [
+                "TODO",
+                "IN_PROGRESS",
+                "IN_REVIEW",
+                "DONE"
+              ]
+            }
+          },
+          {
+            "name": "priority",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "HIGH",
+              "type": "string",
+              "enum": [
+                "LOW",
+                "MEDIUM",
+                "HIGH",
+                "URGENT"
+              ]
+            }
+          },
+          {
+            "name": "assigneeId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "example": "11111111-1111-4111-8111-111111111111",
+              "type": "string"
+            }
+          },
+          {
+            "name": "labelId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "example": "44444444-4444-4444-8444-444444444444",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/api/v1/projects/{projectId}/tasks/{taskId}": {
+      "get": {
+        "operationId": "TasksController_findOne",
+        "parameters": [
+          {
+            "name": "taskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "33333333-3333-4333-8333-333333333333"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "tasks"
+        ]
+      },
+      "patch": {
+        "operationId": "TasksController_update",
+        "parameters": [
+          {
+            "name": "taskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "33333333-3333-4333-8333-333333333333"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTaskDto"
+              },
+              "example": {
+                "title": "Build the login page",
+                "description": "Implement the login form and validation messages.",
+                "priority": "HIGH",
+                "dueDate": "2026-12-31T17:00:00.000Z"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "tasks"
+        ]
+      },
+      "delete": {
+        "operationId": "TasksController_remove",
+        "parameters": [
+          {
+            "name": "taskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "33333333-3333-4333-8333-333333333333"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/api/v1/projects/{projectId}/tasks/{taskId}/status": {
+      "patch": {
+        "operationId": "TasksController_updateStatus",
+        "parameters": [
+          {
+            "name": "taskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "33333333-3333-4333-8333-333333333333"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTaskStatusDto"
+              },
+              "example": {
+                "status": "IN_PROGRESS"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/api/v1/projects/{projectId}/tasks/{taskId}/assign": {
+      "patch": {
+        "operationId": "TasksController_assign",
+        "parameters": [
+          {
+            "name": "taskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "33333333-3333-4333-8333-333333333333"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignTaskDto"
+              },
+              "example": {
+                "assigneeId": "11111111-1111-4111-8111-111111111111"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/api/v1/projects/{projectId}/tasks/{taskId}/labels": {
+      "post": {
+        "operationId": "TasksController_attachLabel",
+        "parameters": [
+          {
+            "name": "taskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "33333333-3333-4333-8333-333333333333"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachLabelDto"
+              },
+              "example": {
+                "labelId": "44444444-4444-4444-8444-444444444444"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/api/v1/projects/{projectId}/tasks/{taskId}/labels/{labelId}": {
+      "delete": {
+        "operationId": "TasksController_detachLabel",
+        "parameters": [
+          {
+            "name": "taskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "33333333-3333-4333-8333-333333333333"
+          },
+          {
+            "name": "labelId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "44444444-4444-4444-8444-444444444444"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/api/v1/projects/{projectId}/tasks/{taskId}/comments": {
+      "post": {
+        "operationId": "CommentsController_create",
+        "parameters": [
+          {
+            "name": "taskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "33333333-3333-4333-8333-333333333333"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCommentDto"
+              },
+              "example": {
+                "body": "The implementation is ready for review."
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "comments"
+        ]
+      },
+      "get": {
+        "operationId": "CommentsController_findAll",
+        "parameters": [
+          {
+            "name": "taskId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "33333333-3333-4333-8333-333333333333"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "example": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "example": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "comments"
+        ]
+      }
+    },
+    "/api/v1/projects/{projectId}/tasks/{taskId}/comments/{commentId}": {
+      "delete": {
+        "operationId": "CommentsController_remove",
+        "parameters": [
+          {
+            "name": "commentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "55555555-5555-4555-8555-555555555555"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "22222222-2222-4222-8222-222222222222"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "33333333-3333-4333-8333-333333333333"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "comments"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Task & Project Management API",
+    "description": "A Jira/Trello-style backend built with NestJS + Prisma",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "health"
+    },
+    {
+      "name": "auth"
+    },
+    {
+      "name": "users"
+    },
+    {
+      "name": "projects"
+    },
+    {
+      "name": "labels"
+    },
+    {
+      "name": "tasks"
+    },
+    {
+      "name": "comments"
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local API"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "RegisterDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "jane@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "a-strong-password"
+          },
+          "name": {
+            "type": "string",
+            "example": "Jane Doe"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "name"
+        ]
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "jane@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "a-strong-password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Jane Smith",
+            "minLength": 2
+          }
+        }
+      },
+      "CreateProjectDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Website redesign",
+            "minLength": 3
+          },
+          "description": {
+            "type": "string",
+            "example": "Plan and deliver the new company website."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateProjectDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Website redesign",
+            "minLength": 3
+          },
+          "description": {
+            "type": "string",
+            "example": "Plan and deliver the new company website."
+          }
+        }
+      },
+      "AddMemberDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "11111111-1111-4111-8111-111111111111"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "OWNER",
+              "MEMBER"
+            ],
+            "example": "MEMBER"
+          }
+        },
+        "required": [
+          "userId",
+          "role"
+        ]
+      },
+      "CreateLabelDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Bug",
+            "minLength": 2
+          },
+          "color": {
+            "type": "string",
+            "example": "#EF4444"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateLabelDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Bug",
+            "minLength": 2
+          },
+          "color": {
+            "type": "string",
+            "example": "#EF4444"
+          }
+        }
+      },
+      "CreateTaskDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Build the login page",
+            "minLength": 3
+          },
+          "description": {
+            "type": "string",
+            "example": "Implement the login form and validation messages."
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "URGENT"
+            ],
+            "example": "HIGH"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-12-31T17:00:00.000Z"
+          },
+          "assigneeId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "11111111-1111-4111-8111-111111111111"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "UpdateTaskDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Build the login page",
+            "minLength": 3
+          },
+          "description": {
+            "type": "string",
+            "example": "Implement the login form and validation messages."
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "URGENT"
+            ],
+            "example": "HIGH"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-12-31T17:00:00.000Z"
+          }
+        }
+      },
+      "UpdateTaskStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "TODO",
+              "IN_PROGRESS",
+              "IN_REVIEW",
+              "DONE"
+            ],
+            "example": "IN_PROGRESS"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "AssignTaskDto": {
+        "type": "object",
+        "properties": {
+          "assigneeId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "11111111-1111-4111-8111-111111111111"
+          }
+        },
+        "required": [
+          "assigneeId"
+        ]
+      },
+      "AttachLabelDto": {
+        "type": "object",
+        "properties": {
+          "labelId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "44444444-4444-4444-8444-444444444444"
+          }
+        },
+        "required": [
+          "labelId"
+        ]
+      },
+      "CreateCommentDto": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string",
+            "example": "The implementation is ready for review.",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "body"
+        ]
+      }
+    }
+  }
+}

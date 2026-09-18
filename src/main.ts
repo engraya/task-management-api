@@ -2,7 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { SwaggerModule } from '@nestjs/swagger';
+import { swaggerConfig } from './config/swagger.config.js';
 
 import { AppModule } from './app.module.js';
 import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter.js';
@@ -34,12 +35,6 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api/v1');
 
-  const swaggerConfig = new DocumentBuilder()
-    .setTitle('Task & Project Management API')
-    .setDescription('A Jira/Trello-style backend built with NestJS + Prisma')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api/docs', app, document);
 

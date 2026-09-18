@@ -4,6 +4,8 @@ A REST API for collaborative project and task management, built with NestJS 12, 
 
 ## Features
 
+Import all endpoints with example bodies into HTTPie using [docs/httpie-collections.json](docs/httpie-collections.json), or use the [OpenAPI JSON](docs/openapi.json). See [import and regeneration instructions](docs/README.md).
+
 - User registration, login with JWT access tokens, and profile updates.
 - Projects with `OWNER` and `MEMBER` membership roles.
 - Tasks with priorities, due dates, assignees, and status updates.
