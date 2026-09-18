@@ -238,7 +238,7 @@ docker compose down
 | `npm run prisma:studio`         | Browse database records in Prisma Studio. |
 | `npm run prisma:migrate:reset`  | Reset the database, deleting its data.    |
 
-A sample [seed script](prisma/seed.ts) exists, but `prisma.config.ts` does not currently configure `migrations.seed`. The legacy package seed entry also references `ts-node`, which is not declared as a dependency. Seeding therefore needs configuration before using `npm run prisma:seed`; normal setup and tests do not require it. Register your own account through the API to get started.
+After applying migrations, run `npm run prisma:seed` (or `npx prisma db seed`) to load the sample [seed script](prisma/seed.ts). Prisma uses `migrations.seed` in `prisma.config.ts` to run it with `tsx`, which is installed with the development dependencies. It creates Alice (`alice@example.com`) and Bob (`bob@example.com`), both with password `password123`, plus a sample project, label, and tasks. Re-running the current script adds another set of sample tasks. Normal setup and tests do not require seeding; you can also register your own account through the API.
 
 ## Project structure
 
