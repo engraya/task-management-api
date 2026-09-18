@@ -10,11 +10,11 @@
     "node": "^24.15.0"
   },
   "scripts": {
-    "build": "nest build",
+    "build": "node api.js && nest build",
     "docs:export": "npm run build && node scripts/export-api.mjs",
     "deploy": "nest deploy",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "node api.js && nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
